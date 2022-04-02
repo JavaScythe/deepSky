@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>deepSky</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 10px;
+            background-color: #000;
+        }
+        *{
+            color: white;
+            font-family: arial;
+        }
+        span{
+            color: #6112FF;
+        }
+        input{
+            color: black;
+            width: 50vw;
+        }
+    </style>
+</head>
+
+<body>
+  deepSky demo v0.0.1
+  <p>this demo is intended as a proof of concept for the power of <span>deepSky</span></p>
+  <p>
+      there are 2 different test urls: (snesgames.group) and (cattn.alt)
+  </p>
+    <input id="input" placeholder="deepSky name (use 1 or 2)">
+    <button>load the demo</button>
+    <pre id="dump"></pre>
+    <p style="display:none;">now the content (obviously pagelike and not just this random id test) would be displayed<br>this provides a "gateway" to all the small game sites that normally would be blocked</p>
+    <script>
+        //ping server using fetch with input of #input and wait for response
+        document.querySelector('button').addEventListener('click', async function(){
+            var b = await fetch('/gateway?tp_url=' + document.querySelector('#input').value + '&method=https&gpath=/');
+            b=await b.json();
+            document.getElementById("dump").textContent = JSON.stringify(b);
+            document.getElementsByTagName("p")[1].style.display = "block";
+        });
+    </script>
+</body>
+</html>
